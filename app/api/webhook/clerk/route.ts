@@ -15,6 +15,8 @@ export async function POST(req: Request) {
     );
   }
 
+  console.log("webhook");
+
   // Get the headers
   const headerPayload = headers();
   const svix_id = headerPayload.get("svix-id");
@@ -77,6 +79,8 @@ export async function POST(req: Request) {
         },
       });
     }
+
+    console.log(newUser, "newUser");
 
     return NextResponse.json({ message: "OK", user: newUser });
   }
