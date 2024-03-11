@@ -1,18 +1,11 @@
-import mongoose, { models } from "mongoose";
+import mongoose, { Schema, models } from "mongoose";
 
 export type IOrder = {
   createdAt: Date;
   stripeId: string;
   totalAmount: string;
-  event: {
-    _id: string;
-    title: string;
-  };
-  buyer: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-  };
+  event: mongoose.Types.ObjectId; // Correct reference type
+  buyer: mongoose.Types.ObjectId; // Correct reference type
 };
 
 const OrderSchema = new mongoose.Schema({
@@ -20,15 +13,15 @@ const OrderSchema = new mongoose.Schema({
   stripeId: { type: String, required: true },
   totalAmount: { type: String },
   event: {
-    _id: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId, // Correct usage
     ref: "Event",
   },
   buyer: {
-    _id: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId, // Correct usage
     ref: "User",
   },
 });
 
-const OrderModel = models.Category || mongoose.model("Order", OrderSchema);
+const OrderModel = models.Order || mongoose.model("Order", OrderSchema); // Correct model naming
 
 export default OrderModel;
