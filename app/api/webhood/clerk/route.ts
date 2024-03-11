@@ -52,7 +52,6 @@ export async function POST(req: Request) {
   }
 
   // Get the ID and type
-  const { id } = evt.data;
   const eventType = evt.type;
 
   if (eventType === "user.created") {
@@ -67,6 +66,8 @@ export async function POST(req: Request) {
       lastName: last_name,
       photo: image_url,
     };
+
+    console.log(eventType);
 
     const newUser = await createUser(user);
 
